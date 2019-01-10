@@ -5,8 +5,7 @@ import Data.Function
 import Debug.Trace
 maze_path = "C:\\Users\\Rares\\Desktop\\Haskill\\Fackin Jeleuri\\maze3.txt"
 
--- Useful code from Lecture 25
--- You may use this freely in your solutions
+
 
 get :: [String] -> Int -> Int -> Char
 get maze x y = (maze !! y) !! x
@@ -28,9 +27,7 @@ set maze x y char =
     in
         new_maze
 
----- Part A
 
--- Question 1
 
 get_maze :: String -> IO [String]
 get_maze path = do
@@ -39,27 +36,21 @@ get_maze path = do
         return output
 
 
--- Question 2
+
 
 print_maze :: [String] -> IO ()
 print_maze maze = do
        putStrLn $ unlines maze
 
--- Question 3
+
 
 is_wall :: [String] -> (Int, Int) -> Bool
 is_wall maze (x,y) = if get maze x y == '#' then True else False
 
--- Question 4
 
 place_player :: [String] -> (Int, Int) -> [String]
 place_player maze (x,y) =   set maze x y '@'
 
-
-
----- Part B
-
--- Question 5
 
 move :: (Int, Int) -> Char -> (Int, Int)
 move (x,y) 'w' = (x,y-1)
@@ -68,7 +59,6 @@ move (x,y) 'a' = (x-1,y)
 move (x,y) 'd' = (x+1,y)
 move (x,y) _ = (x,y)
 
--- Question 6
 
 can_move :: [String] -> (Int, Int) -> Char -> Bool
 can_move maze (x,y) direction = let
@@ -76,7 +66,6 @@ can_move maze (x,y) direction = let
                                 in
               if is_wall maze moved == True then False else True
 
--- Question 7
 
 game_loop :: [String] -> (Int, Int) -> IO ()
 game_loop maze (x,y) = do
@@ -87,9 +76,6 @@ game_loop maze (x,y) = do
 
 
 
----- Part C
-
--- Question 8
 
 --My approach to the problem : Because the player starts in the top left corner and the goal is at the bottom right corner, the player should prioritise moving down first, then right, and lastly up or left
 --When the player moves, it will mark every position he's been through with '.'
@@ -129,7 +115,7 @@ remove_bad_paths ((x, y):paths)
 get_path :: [String] -> (Int, Int) -> (Int, Int) -> [(Int, Int)]
 get_path maze (x, y) (a, b) =    find_a_path maze (x, y) (a, b)
 
--- Question 9
+
 
 
 print_path maze [] = maze
